@@ -1,12 +1,15 @@
 defmodule TinyBlog.Posts do
   use GenServer
+  @moduledoc """
+  Holds the state for posts and blog properties.
+  """
 
   def start_link do
     GenServer.start_link(__MODULE__, [], name: __MODULE__)
   end
 
   def init(_state) do
-    posts = priv_path
+    posts = priv_path()
     |> Path.join("blog_posts")
     |> Path.join("*.md")
     |> Path.wildcard
@@ -23,9 +26,15 @@ defmodule TinyBlog.Posts do
 
       {:ok, html, _} = Earmark.as_html(body)
 
-      %{"slug" => path, "html" => html}
-      |> Map.merge(YamlElixir.read_from_string(yaml))
+      data = YamlElixir.read_from_string(yaml)
+
+      %{"slug" => path, "html" => html, "markdown" => body}
+      |> Map.merge(data)
     end)
+    |> Enum.sort_by(fn(p) ->
+      p["date"]
+    end)
+    |> Enum.reverse
     {:ok, [posts: posts]}
   end
 

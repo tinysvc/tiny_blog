@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><%= Application.get_env(:tiny_blog, :name) %></title>
+  <link href="<%= Application.get_env(:tiny_blog, :url) %>"/>
+  <updated>2003-12-13T18:30:02Z</updated>
+  <author>
+    <name><%= Application.get_env(:tiny_blog, :author) %></name>
+  </author>
+  <id><%= Application.get_env(:tiny_blog, :url) %></id>
+
+  <%= for post <- posts do %>
+    <entry>
+      <title><%= post["title"] %></title>
+      <link href="<%= Application.get_env(:tiny_blog, :url) |> String.trim("/") %>/<%= post["slug"] %>" />
+      <id><%= Application.get_env(:tiny_blog, :url) |> String.trim("/") %>/<%= post["slug"] %></id>
+      <author><%= post["author"] || Application.get_env(:tiny_blog, :author) %></author>
+      <updated><%= post["date"] %></updated>
+      <content><%= post["markdown"]%></content>
+    </entry>
+  <% end %>
+
+</feed>
