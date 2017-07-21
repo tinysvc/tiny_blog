@@ -1,6 +1,6 @@
 defmodule TinyBlog.Mixfile do
   use Mix.Project
-  @version "0.0.1"
+  @version "0.1.0"
 
   def project do
     [app: :tiny_blog,
@@ -14,7 +14,7 @@ defmodule TinyBlog.Mixfile do
        extras: ["README.md"],
        main: "readme",
        source_ref: "v#{@version}",
-       source_url: "https://github.com/sonerdy/tiny_blog",
+       source_url: "https://github.com/tinysvc/tiny_blog",
      ],
      deps: deps()]
   end
@@ -41,8 +41,8 @@ defmodule TinyBlog.Mixfile do
      files: ["lib", "mix.exs", "README*", "LICENSE*"],
      maintainers: ["Brandon Joyce"],
      licenses: ["MIT"],
-     links: %{"GitHub" => "https://github.com/sonerdy/tiny_blog",
-      "Docs" => "https://github.com/sonerdy/tiny_blog"}]
+     links: %{"GitHub" => "https://github.com/tinysvc/tiny_blog",
+      "Docs" => "https://github.com/tinysvc/tiny_blog"}]
   end
 
   # Dependencies can be Hex packages:
@@ -58,7 +58,8 @@ defmodule TinyBlog.Mixfile do
     [
       {:yaml_elixir, "~> 1.3.0"},
       {:earmark, "~> 1.2"},
-      {:ex_doc, "~> 0.14", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.14", only: :dev, runtime: false},
+      {:plug, "~> 1.3.5"}
     ]
   end
 end
