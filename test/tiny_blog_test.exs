@@ -3,7 +3,7 @@ defmodule TinyBlogTest do
   doctest TinyBlog
 
   test "retrieving all blog posts" do
-    {:ok, [post1, post2]} = TinyBlog.posts
+    {:ok, [post2, post1]} = TinyBlog.posts
     assert post1["slug"] == "test-post-1"
     assert post1["title"] == "Test Post 1"
     assert post1["html"] |> String.contains?("<h1>Test Post 1</h1>")
